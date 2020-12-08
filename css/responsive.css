@@ -1,0 +1,46 @@
+/*Change all elements to use border-box*/
+html {
+box-sizing: border-box;
+}
+*, *:before, *:after {
+box-sizing: inherit;
+}
+/* Base Style */
+
+/* Layout Style */
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1170px;
+    }
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+[class*='col-'] {
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+/*Media Query excludes extra small devices and includes small and above */
+@media (min-width: 48em) {
+[class*='col-'] {
+float: left;
+}
+/* Column Third */
+.col-1-3 {
+width: 33.3333%;
+}
+/*Column Two Thirds*/
+.col-2-3 {
+width: 66.6666%;
+}
+}
