@@ -64,28 +64,28 @@
           <img src="assets/burger.jpg"> <!-- random image -->
           <div class="caption center-align">
             <h3>Juicy Burgers</h3>
-            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Hello.</h5>
+            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Burgers + Beer = Harmony</h5>
           </div>
         </li>
         <li>
           <img src="assets/deepdish-large.jpg"> <!-- random image -->
           <div class="caption left-align">
             <h3>Chicago-style Deep Dish</h3>
-            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Hello.</h5>
+            <h5 class="light grey-text text-lighten-3 hide-on-small-only">And you thought we were just a SAAHHSAGE town!</h5>
           </div>
         </li>
         <li>
           <img src="assets/tacos-large.jpg"> <!-- random image -->
           <div class="caption right-align">
             <h3>Street Style Tacos</h3>
-            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Hello.</h5>
+            <h5 class="light grey-text text-lighten-3 hide-on-small-only">MUY CALIENTE!!!</h5>
           </div>
         </li>
         <li>
           <img src="assets/Mac.jpg"> <!-- random image -->
           <div class="caption center-align">
             <h3>The ULTIMATE Comfort Food!</h3>
-            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Hello.</h5>
+            <h5 class="light grey-text text-lighten-3 hide-on-small-only">Get those FAT PANTS on!.</h5>
           </div>
         </li>
       </ul>
@@ -129,11 +129,11 @@
                   <!--simple card for JSON data-->
                 <span class="med-font">Zips within 3 miles of you</span>
 <br>
-<span class="sm-font">(using the same API for 3  calls)</span>
+<span class="sm-font"></span>
                   <div id="zip-data" class="row">
                     <span class="zip_code"></span>
                     <div class="col s12 m12">
-                      <div class="card blue-grey darken-1">
+                      <div class="card red darken-1">
                         <div class="card-content white-text">
                           <span class="card-title"></span>
                         </div>
@@ -194,8 +194,7 @@
               <img src="assets/tacos-sm.jpg" alt="">
               <span class="card-title">Tacos</span>
             </div>
-            <div class="card-content">Lorem ipsum dolor sit amet.
-            </div>
+            <div class="card-content">Hand food is the BEST food!</div>
           </div>
         </div>
         <div class="col s12 m4">
@@ -204,17 +203,17 @@
               <img src="assets/pizza-sm.jpg" alt="">
               <span class="card-title">Pizza</span>
             </div>
-            <div class="card-content">Lorem ipsum dolor sit amet.
+            <div class="card-content">Kickstart my Heartburn!
             </div>
           </div>
         </div>
         <div class="col s12 m4">
           <div class="card">
             <div class="card-image">
-              <img src="assets/burgers-sm.jpg" alt="">
-              <span class="card-title">Burgers</span>
+              <img src="assets/cake.jpg" alt="">
+              <span class="card-title">Desserts</span>
             </div>
-            <div class="card-content">Lorem ipsum dolor sit amet.
+            <div class="card-content">Decadent Desserts!
             </div>
           </div>
         </div>
@@ -249,7 +248,7 @@
   <section id="gallery" class="section section-gallery scrollspy">
     <div class="container">
       <h4 class="center">
-        <span class="red">What Are You In The Mood For?</span>
+        <span class="white">Hungry yet?</span>
       </h4>
       <div class="row">
         <div class="col s12 m3">
@@ -381,7 +380,7 @@
 // RUN A FOR LOOP TO RETURN MULTIPLE ENTRIES          
 
           for (i in response.zip_codes){
-              city+= "<span style='color:red;'>" + response.zip_codes[i].city + "</span><br>"
+              city+= "<span style='color:black;'>" + response.zip_codes[i].city + "</span><br>"
           }
 //        response = response.zip_codes[0];
 //        var result = response.city + " " + response.state + " " + response.zip_code;
@@ -405,7 +404,7 @@
       }).then(function (response) {
           var state =""
           for (i in response.zip_codes){
-              state+= "<span style='color:green;'>" + response.zip_codes[i].state + "</span><br>"
+              state+= "<span style='color:black;'>" + response.zip_codes[i].state + "</span><br>"
           }
           $(".state").html(state);
       })
@@ -419,7 +418,7 @@
       }).then(function (response) {
           var zip =""
           for (i in response.zip_codes){
-              zip+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
+              zip+= "<span style='color:black;'>" + response.zip_codes[i].zip_code + "</span><br>"
           }
           $(".zip").html(zip);
       })
