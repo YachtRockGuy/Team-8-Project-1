@@ -17,7 +17,7 @@
 <body id="home" class="scrollspy">
   <!-- nav bar -->
   <div class="navbar-fixed">
-    <nav class="red">
+    <nav class="red ">
       <div class="container">
         <div class="nav-wrapper">
           <a href="#" class="brand-logo hide-on-med-and-down show-on-extra-large show-on-large">Lockdown Food Delivery</a>
@@ -367,7 +367,7 @@
       var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/3/miles";
       //var queryURL = "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles"; 
 
-// THIS IS THE SECOND API CALL FOR STATE
+// THIS IS THE FIRST API CALL FOR CITY
         
       $.ajax({
         url: queryURL,
@@ -399,7 +399,7 @@
         
 // THIS IS THE SECOND API CALL FOR STATE
         
-              $.ajax({
+        $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
@@ -407,15 +407,13 @@
           for (i in response.zip_codes){
               state+= "<span style='color:green;'>" + response.zip_codes[i].state + "</span><br>"
           }
-
           $(".state").html(state);
-
       })
       
 // THIS IS THE THIRD API CALL FOR ZIP CODE
         
         
-                      $.ajax({
+        $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
@@ -423,12 +421,27 @@
           for (i in response.zip_codes){
               zip+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
           }
-
           $(".zip").html(zip);
-
       })
         
+//  2ND API HERE (If you put zip222 into any class it will display this info there)
         
+      var zip222 = $("#zip-input").val();
+      var apikey222 = "cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH"
+      var queryURL222 = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/3/miles";
+        
+      $.ajax({
+        url: queryURL222,
+        method: "GET"
+      }).then(function (response) {
+          var zip222 =""
+          for (i in response.zip_codes){
+              zip222+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
+          }
+          $(".zip222").html(zip222);
+      })
+        
+//  2ND API END
         
       //js zip code api key: js-NZ86iosod6VqJYBLF7B5jGDnRNVv7oRTeq8YQDvHPUMffLWQTZmqYCBNesgaYPwD
 
