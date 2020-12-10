@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://kit.fontawesome.com/cb8aa7842a.js" crossorigin="anonymous"></script>
   <title>Team 8 | Project 1</title>
 
@@ -16,10 +17,11 @@
 <body id="home" class="scrollspy">
   <!-- nav bar -->
   <div class="navbar-fixed">
-    <nav class="red">
+    <nav class="red ">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Lockdown Food Delivery</a>
+          <a href="#" class="brand-logo hide-on-med-and-down show-on-extra-large show-on-large">Lockdown Food Delivery</a>
+          <a href="#" class="brand-logo show-on-medium-and-down hide-on-large-only hide-on-extra-large-only">Lockdown Food Delivery</a>
           <a href="#" data-target="mobile-nav" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
@@ -111,7 +113,7 @@
         <div class="col s12 m12">
           <div class="card-panel">
             <i class="material-icons large red-text">
-              room</i>
+              Food</i>
             <h4>Enter Zip Code</h4>
             <p>Find carry out options nearby</p>
             <div class="row">
@@ -125,34 +127,38 @@
                     <br>
                     <br>
                   <!--simple card for JSON data-->
-                <div>Here are your local towns</div>
+                <span class="med-font">Zips within 3 miles of you</span>
+<br>
+<span class="sm-font">(using the same API for 3  calls)</span>
                   <div id="zip-data" class="row">
+                    <span class="zip_code"></span>
                     <div class="col s12 m12">
                       <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
                           <span class="card-title"></span>
-
-
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col s12 m4">
-                    <div class="card-panel">
-                      <i class="material-icons large red-text">
-                        room</i>
-                      <h4>Enter Zip Code</h4>
-                      <p>Find carry out options nearby</p>
+                    
+                    <div id="results" class="row">
+                        <div class="col s4">
+                            <span class="title">City</span><br>
+                            <span class="result city"></span>
+                        </div>
+                        
+                        <div class="col s4">
+                            <span class="title">State</span><br>
+                            <span class="result state"></span>
+                        </div>
+                        
+                        <div class="col s4">
+                            <span class="title">Zip</span><br>
+                            <span class="result zip"></span>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col s12 m4">
-                    <div class="card-panel">
-                      <i class="material-icons large red-text">
-                        room</i>
-                      <h4>Enter Zip Code</h4>
-                      <p>Find carry out options nearby</p>
-                    </div>
-                  </div>
+                    
+                    
                 </div>
             </div>
   </section>
@@ -358,25 +364,85 @@
 
       var zip = $("#zip-input").val();
       var apikey = "cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH"
-      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles";
+      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/3/miles";
       //var queryURL = "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles"; 
 
+// THIS IS THE FIRST API CALL FOR CITY
+        
       $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
-        // response = response.zip_codes[0];
-        // var result = response.city + " " + response.state + " " + response.zip_code;
-        // $("#zip-data").text(result);
-        $("#zip-data").text(JSON.stringify(response));
-        // $("#zip-data").text(response.zip_code);
-        // $("#zip-data").text(response.distance);
-        // $("#zip-data").text(response.city);
-        // $("#zip-data").text(response.state);
+          
+// SET THE VARIABLE
+          
+          var city =""
 
+// RUN A FOR LOOP TO RETURN MULTIPLE ENTRIES          
+
+          for (i in response.zip_codes){
+              city+= "<span style='color:red;'>" + response.zip_codes[i].city + "</span><br>"
+          }
+//        response = response.zip_codes[0];
+//        var result = response.city + " " + response.state + " " + response.zip_code;
+//        $("#zip-data").text(result);
+          $(".city").html(city);
+//        $("#zip-data").text(JSON.stringify(response));
+//          $(".zip").text(response.zip_code);
+//        $("#zip-data").text(response.distance);
+//          $(".city").text(response.city);
+//          $(".state").text(response.state);
+  
         console.log(queryURL);
         console.log(response);
       })
+        
+// THIS IS THE SECOND API CALL FOR STATE
+        
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+          var state =""
+          for (i in response.zip_codes){
+              state+= "<span style='color:green;'>" + response.zip_codes[i].state + "</span><br>"
+          }
+          $(".state").html(state);
+      })
+      
+// THIS IS THE THIRD API CALL FOR ZIP CODE
+        
+        
+        $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+          var zip =""
+          for (i in response.zip_codes){
+              zip+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
+          }
+          $(".zip").html(zip);
+      })
+        
+//  2ND API HERE (If you put zip222 into any class it will display this info there)
+        
+      var zip222 = $("#zip-input").val();
+      var apikey222 = "cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH"
+      var queryURL222 = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/3/miles";
+        
+      $.ajax({
+        url: queryURL222,
+        method: "GET"
+      }).then(function (response) {
+          var zip222 =""
+          for (i in response.zip_codes){
+              zip222+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
+          }
+          $(".zip222").html(zip222);
+      })
+        
+//  2ND API END
+        
       //js zip code api key: js-NZ86iosod6VqJYBLF7B5jGDnRNVv7oRTeq8YQDvHPUMffLWQTZmqYCBNesgaYPwD
 
       //zip code api key: cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH
