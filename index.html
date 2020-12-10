@@ -127,7 +127,9 @@
                     <br>
                     <br>
                   <!--simple card for JSON data-->
-                <div class="nice">You are located in.....</div>
+                <span class="med-font">Zips within 3 miles of you</span>
+<br>
+<span class="sm-font">(using the same API for 3  calls)</span>
                   <div id="zip-data" class="row">
                     <span class="zip_code"></span>
                     <div class="col s12 m12">
@@ -362,25 +364,72 @@
 
       var zip = $("#zip-input").val();
       var apikey = "cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH"
-      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/1/miles";
+      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/3/miles";
       //var queryURL = "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles"; 
 
+// THIS IS THE SECOND API CALL FOR STATE
+        
       $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
-        response = response.zip_codes[0];
+          
+// SET THE VARIABLE
+          
+          var city =""
+
+// RUN A FOR LOOP TO RETURN MULTIPLE ENTRIES          
+
+          for (i in response.zip_codes){
+              city+= "<span style='color:red;'>" + response.zip_codes[i].city + "</span><br>"
+          }
+//        response = response.zip_codes[0];
 //        var result = response.city + " " + response.state + " " + response.zip_code;
 //        $("#zip-data").text(result);
+          $(".city").html(city);
 //        $("#zip-data").text(JSON.stringify(response));
-          $(".zip").text(response.zip_code);
+//          $(".zip").text(response.zip_code);
 //        $("#zip-data").text(response.distance);
-          $(".city").text(response.city);
-          $(".state").text(response.state);
-
+//          $(".city").text(response.city);
+//          $(".state").text(response.state);
+  
         console.log(queryURL);
         console.log(response);
       })
+        
+// THIS IS THE SECOND API CALL FOR STATE
+        
+              $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+          var state =""
+          for (i in response.zip_codes){
+              state+= "<span style='color:green;'>" + response.zip_codes[i].state + "</span><br>"
+          }
+
+          $(".state").html(state);
+
+      })
+      
+// THIS IS THE THIRD API CALL FOR ZIP CODE
+        
+        
+                      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).then(function (response) {
+          var zip =""
+          for (i in response.zip_codes){
+              zip+= "<span style='color:blue;'>" + response.zip_codes[i].zip_code + "</span><br>"
+          }
+
+          $(".zip").html(zip);
+
+      })
+        
+        
+        
       //js zip code api key: js-NZ86iosod6VqJYBLF7B5jGDnRNVv7oRTeq8YQDvHPUMffLWQTZmqYCBNesgaYPwD
 
       //zip code api key: cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH
