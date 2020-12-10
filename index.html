@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://kit.fontawesome.com/cb8aa7842a.js" crossorigin="anonymous"></script>
   <title>Team 8 | Project 1</title>
 
@@ -19,7 +20,8 @@
     <nav class="red">
       <div class="container">
         <div class="nav-wrapper">
-          <a href="#" class="brand-logo">Lockdown Food Delivery</a>
+          <a href="#" class="brand-logo hide-on-med-and-down show-on-extra-large show-on-large">Lockdown Food Delivery</a>
+          <a href="#" class="brand-logo show-on-medium-and-down hide-on-large-only hide-on-extra-large-only">Lockdown Food Delivery</a>
           <a href="#" data-target="mobile-nav" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
@@ -111,7 +113,7 @@
         <div class="col s12 m12">
           <div class="card-panel">
             <i class="material-icons large red-text">
-              room</i>
+              Food</i>
             <h4>Enter Zip Code</h4>
             <p>Find carry out options nearby</p>
             <div class="row">
@@ -125,34 +127,36 @@
                     <br>
                     <br>
                   <!--simple card for JSON data-->
-                <div>Here are your local towns</div>
+                <div class="nice">You are located in.....</div>
                   <div id="zip-data" class="row">
+                    <span class="zip_code"></span>
                     <div class="col s12 m12">
                       <div class="card blue-grey darken-1">
                         <div class="card-content white-text">
                           <span class="card-title"></span>
-
-
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col s12 m4">
-                    <div class="card-panel">
-                      <i class="material-icons large red-text">
-                        room</i>
-                      <h4>Enter Zip Code</h4>
-                      <p>Find carry out options nearby</p>
+                    
+                    <div id="results" class="row">
+                        <div class="col s4">
+                            <span class="title">City</span><br>
+                            <span class="result city"></span>
+                        </div>
+                        
+                        <div class="col s4">
+                            <span class="title">State</span><br>
+                            <span class="result state"></span>
+                        </div>
+                        
+                        <div class="col s4">
+                            <span class="title">Zip</span><br>
+                            <span class="result zip"></span>
+                        </div>
                     </div>
-                  </div>
-                  <div class="col s12 m4">
-                    <div class="card-panel">
-                      <i class="material-icons large red-text">
-                        room</i>
-                      <h4>Enter Zip Code</h4>
-                      <p>Find carry out options nearby</p>
-                    </div>
-                  </div>
+                    
+                    
                 </div>
             </div>
   </section>
@@ -358,21 +362,21 @@
 
       var zip = $("#zip-input").val();
       var apikey = "cZikOcr4948UWDEGCGKnI1xKOaUYqRjqzqamybB42vuUkTGMnNA1wZYsFVDpcHcH"
-      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles";
+      var queryURL = "https://cors-anywhere.herokuapp.com/" + "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/1/miles";
       //var queryURL = "https://www.zipcodeapi.com/rest/" + apikey + "/radius.json/" + zip + "/15/miles"; 
 
       $.ajax({
         url: queryURL,
         method: "GET"
       }).then(function (response) {
-        // response = response.zip_codes[0];
-        // var result = response.city + " " + response.state + " " + response.zip_code;
-        // $("#zip-data").text(result);
-        $("#zip-data").text(JSON.stringify(response));
-        // $("#zip-data").text(response.zip_code);
-        // $("#zip-data").text(response.distance);
-        // $("#zip-data").text(response.city);
-        // $("#zip-data").text(response.state);
+        response = response.zip_codes[0];
+//        var result = response.city + " " + response.state + " " + response.zip_code;
+//        $("#zip-data").text(result);
+//        $("#zip-data").text(JSON.stringify(response));
+          $(".zip").text(response.zip_code);
+//        $("#zip-data").text(response.distance);
+          $(".city").text(response.city);
+          $(".state").text(response.state);
 
         console.log(queryURL);
         console.log(response);

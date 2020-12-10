@@ -12,3 +12,28 @@
 .icon-block .material-icons {
 	font-size: inherit;
 }
+
+.nice {
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.title {
+        font-family: sans-serif;
+    font-size: 30px;
+    color: darkgrey;
+}
+
+.result {
+        font-family: sans-serif;
+    font-size: 30px;
+    color: darkslategrey;
+}
+
+.brand-logo.show-on-medium-and-down {
+    font-size: 16px;
+}
+
+.brand-logo {
+    font-size: 18px;
+}
